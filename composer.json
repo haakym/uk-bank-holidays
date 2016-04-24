@@ -1,0 +1,21 @@
+{
+    "name": "haakym/uk-bank-holidays",
+    "description": "Get the bank holidays in the UK",
+    "license": "MIT",
+    "keywords": ["holiday", "bankholiday"],
+    "authors": [
+        {
+            "name": "Dominic Jones",
+            "email": "haakym@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Haakym\\UKBankHoliday\\": "src"
+        }
+    }
+}
