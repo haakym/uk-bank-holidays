@@ -13,7 +13,7 @@ class UKBankHolidayTest extends PHPUnit_Framework_TestCase {
 
   public function testGetAllBankHolidays()
   {
-    $allBankHolidays = (new UKBankHoliday("2007"))->getAllBankHolidays();
+    $allBankHolidays = (new UKBankHoliday("2007"))->allBankHolidays();
     
     $expectedDates = [
         "2007-01-01",

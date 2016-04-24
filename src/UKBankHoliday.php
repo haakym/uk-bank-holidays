@@ -4,131 +4,183 @@ class UKBankHoliday {
 
     protected $yr;
 
-    public function __construct($yr) {
+    public function __construct($yr)
+    {
         $this->yr = $yr;
     }
 
-    public function getAllBankHolidays() {
-        // New year's:
-        switch ( date("w", strtotime("{$this->yr}-01-01 12:00:00")) ) {
+    public function newYears($year)
+    {
+        $newYearsDay = date("w", strtotime("{$year}-01-01 12:00:00"));
+
+        switch ($newYearsDay) {
             case 6:
-                $bankHols[] = "{$this->yr}-01-03";
+                $date = "{$this->yr}-01-03";
                 break;
             case 0:
-                $bankHols[] = "{$this->yr}-01-02";
+                $date = "{$this->yr}-01-02";
                 break;
             default:
-                $bankHols[] = "{$this->yr}-01-01";
+                $date = "{$this->yr}-01-01";
         }
 
-        // Good friday:
-        $bankHols[] = date("Y-m-d", strtotime( "+".(easter_days($this->yr) - 2)." days", strtotime("{$this->yr}-03-21 12:00:00") ));
+        return $date;
+    }
 
-        // Easter Monday:
-        $bankHols[] = date("Y-m-d", strtotime( "+".(easter_days($this->yr) + 1)." days", strtotime("{$this->yr}-03-21 12:00:00") ));
+    public function goodFriday($year)
+    {
+        return date("Y-m-d", strtotime( "+".(easter_days($year) - 2)." days", strtotime("{$year}-03-21 12:00:00") ));
+    }
 
-        // May Day:
-        if ($this->yr == 1995) {
-            $bankHols[] = "1995-05-08"; // VE day 50th anniversary year exception
+    public function easterMonday($year)
+    {
+        return date("Y-m-d", strtotime( "+".(easter_days($this->yr) + 1)." days", strtotime("{$year}-03-21 12:00:00") ));
+    }
+
+    public function mayDay($year)
+    {
+        $mayDay = '';
+
+        if ($year == 1995) {
+            $mayDay = "1995-05-08"; // VE day 50th anniversary year exception
         } else {
-            switch (date("w", strtotime("{$this->yr}-05-01 12:00:00"))) {
+            switch (date("w", strtotime("{$year}-05-01 12:00:00"))) {
                 case 0:
-                    $bankHols[] = "{$this->yr}-05-02";
+                    $mayDay = "{$year}-05-02";
                     break;
                 case 1:
-                    $bankHols[] = "{$this->yr}-05-01";
+                    $mayDay = "{$year}-05-01";
                     break;
                 case 2:
-                    $bankHols[] = "{$this->yr}-05-07";
+                    $mayDay = "{$year}-05-07";
                     break;
                 case 3:
-                    $bankHols[] = "{$this->yr}-05-06";
+                    $mayDay = "{$year}-05-06";
                     break;
                 case 4:
-                    $bankHols[] = "{$this->yr}-05-05";
+                    $mayDay = "{$year}-05-05";
                     break;
                 case 5:
-                    $bankHols[] = "{$this->yr}-05-04";
+                    $mayDay = "{$year}-05-04";
                     break;
                 case 6:
-                    $bankHols[] = "{$this->yr}-05-03";
+                    $mayDay = "{$year}-05-03";
                     break;
             }
         }
+        return $mayDay;
+    }
 
-        // Whitsun:
-        if ($this->yr == 2002) { // exception year
-            $bankHols[] = "2002-06-03";
-            $bankHols[] = "2002-06-04";
+    public function whitSun($year)
+    {
+        $whitSun = '';
+
+        if ($year == 2002) { // exception year
+            $whitSun = "2002-06-03";
+            $whitSun = "2002-06-04";
         } else {
-            switch (date("w", strtotime("{$this->yr}-05-31 12:00:00"))) {
+            switch (date("w", strtotime("{$year}-05-31 12:00:00"))) {
                 case 0:
-                    $bankHols[] = "{$this->yr}-05-25";
+                    $whitSun = "{$year}-05-25";
                     break;
                 case 1:
-                    $bankHols[] = "{$this->yr}-05-31";
+                    $whitSun = "{$year}-05-31";
                     break;
                 case 2:
-                    $bankHols[] = "{$this->yr}-05-30";
+                    $whitSun = "{$year}-05-30";
                     break;
                 case 3:
-                    $bankHols[] = "{$this->yr}-05-29";
+                    $whitSun = "{$year}-05-29";
                     break;
                 case 4:
-                    $bankHols[] = "{$this->yr}-05-28";
+                    $whitSun = "{$year}-05-28";
                     break;
                 case 5:
-                    $bankHols[] = "{$this->yr}-05-27";
+                    $whitSun = "{$year}-05-27";
                     break;
                 case 6:
-                    $bankHols[] = "{$this->yr}-05-26";
+                    $whitSun = "{$year}-05-26";
                     break;
             }
         }
+        return $whitSun;
+    }
 
-        // Summer Bank Holiday:
-        switch (date("w", strtotime("{$this->yr}-08-31 12:00:00"))) {
+    public function summerBankHoliday($year)
+    {
+        $summerBankHoliday = '';
+
+        switch (date("w", strtotime("{$year}-08-31 12:00:00"))) {
             case 0:
-                $bankHols[] = "{$this->yr}-08-25";
+                $summerBankHoliday = "{$year}-08-25";
                 break;
             case 1:
-                $bankHols[] = "{$this->yr}-08-31";
+                $summerBankHoliday = "{$year}-08-31";
                 break;
             case 2:
-                $bankHols[] = "{$this->yr}-08-30";
+                $summerBankHoliday = "{$year}-08-30";
                 break;
             case 3:
-                $bankHols[] = "{$this->yr}-08-29";
+                $summerBankHoliday = "{$year}-08-29";
                 break;
             case 4:
-                $bankHols[] = "{$this->yr}-08-28";
+                $summerBankHoliday = "{$year}-08-28";
                 break;
             case 5:
-                $bankHols[] = "{$this->yr}-08-27";
+                $summerBankHoliday = "{$year}-08-27";
                 break;
             case 6:
-                $bankHols[] = "{$this->yr}-08-26";
+                $summerBankHoliday = "{$year}-08-26";
                 break;
         }
+        return $summerBankHoliday;
+    }
 
-        // Christmas:
+    public function christmas($year)
+    {
+        $christmas = [];
+
         switch ( date("w", strtotime("{$this->yr}-12-25 12:00:00")) ) {
             case 5:
-                $bankHols[] = "{$this->yr}-12-25";
-                $bankHols[] = "{$this->yr}-12-28";
+                $christmas[] = "{$this->yr}-12-25";
+                $christmas[] = "{$this->yr}-12-28";
                 break;
             case 6:
-                $bankHols[] = "{$this->yr}-12-27";
-                $bankHols[] = "{$this->yr}-12-28";
+                $christmas[] = "{$this->yr}-12-27";
+                $christmas[] = "{$this->yr}-12-28";
                 break;
             case 0:
-                $bankHols[] = "{$this->yr}-12-26";
-                $bankHols[] = "{$this->yr}-12-27";
+                $christmas[] = "{$this->yr}-12-26";
+                $christmas[] = "{$this->yr}-12-27";
                 break;
             default:
-                $bankHols[] = "{$this->yr}-12-25";
-                $bankHols[] = "{$this->yr}-12-26";
+                $christmas[] = "{$this->yr}-12-25";
+                $christmas[] = "{$this->yr}-12-26";
         }
+        return $christmas;
+    }
+
+    public function allBankHolidays()
+    {
+        $bankHols[] = $this->newYears($this->yr);
+
+        // Good friday:
+        $bankHols[] = $this->goodFriday($this->yr);
+
+        // Easter Monday:
+        $bankHols[] = $this->easterMonday($this->yr);
+
+        // May Day:
+        $bankHols[] = $this->mayDay($this->yr);
+
+        // Whitsun:
+        $bankHols[] = $this->whitSun($this->yr);        
+
+        // Summer Bank Holiday:
+        $bankHols[] = $this->summerBankHoliday($this->yr);
+
+        // Christmas:
+        $bankHols = array_merge($bankHols, $this->christmas($this->yr));
 
         // Millenium eve
         if ($this->yr == 1999) {
