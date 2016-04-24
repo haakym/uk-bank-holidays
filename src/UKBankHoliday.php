@@ -15,13 +15,13 @@ class UKBankHoliday {
 
         switch ($newYearsDay) {
             case 6:
-                $date = "{$this->yr}-01-03";
+                $date = "{$year}-01-03";
                 break;
             case 0:
-                $date = "{$this->yr}-01-02";
+                $date = "{$year}-01-02";
                 break;
             default:
-                $date = "{$this->yr}-01-01";
+                $date = "{$year}-01-01";
         }
 
         return $date;
